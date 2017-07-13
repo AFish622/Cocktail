@@ -15,8 +15,19 @@
 	<div>
 		<form class="search-form">
 			<input class="main-search" type="text" placeholder="Search cocktail recepies">
+				<div class="dropdown">
+					<button class="drop-button">Search By</button>
+						<div class="dropdown-content">
+							<a href="">Ingredients</a>
+							<a href="">Cocktails</a>
+						</div>
+				</div>
 			<input  class="main-submit" type="submit" value="Cheers">
 		</form>
+	</div>
+
+	<div>
+		<p class="results"></p>	
 	</div>
 
 	<script
@@ -24,7 +35,7 @@
   		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   		crossorigin="anonymous">
 	</script>
-	<script src="cocktail.js"></script>
+	<script type="text/javascript" src="cocktail.js"></script>
 
 </body>
 </html>
