@@ -58,3 +58,8 @@
 .results {
 	display: block;
 }
+
+.appendCocktail {
+	list-style: none;
+	text-align: center;
+}
