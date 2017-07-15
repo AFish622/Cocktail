@@ -62,4 +62,10 @@
 .appendCocktail {
 	list-style: none;
 	text-align: center;
+	margin-bottom: 25px;
+	border: 1px solid black;
+}
+
+.hidden {
+	display: none;
 }

@@ -16,18 +16,18 @@
 		<form class="search-form">
 			<input class="main-search" type="text" placeholder="Search cocktail recepies">
 				<div class="dropdown">
-					<button class="drop-button">Search By</button>
-						<div class="dropdown-content">
-							<a class="ingredients-search" href="">Ingredients</a>
-							<a class="cocktail-search" href="">Cocktails</a>
-						</div>
+					<select>
+						<option value="Cocktail">Cocktail</option>
+						<option value="Ingredients">Ingredients</option>
+					</select>
 				</div>
 			<input  class="main-submit" type="submit" value="Cheers">
 		</form>
 	</div>
 
-	<div>
+	<div class="search-results">
 		<p class="results"></p>
+		<p class="detailed-results"></p>
 	</div>
 
 	<script
@@ -37,6 +37,23 @@
 	</script>
 	<script type="text/javascript" src="cocktail.js"></script>
 	<a href=""></a>
+
+<script id="drink-template" type="text/template">
+	<div>
+		<label>Drink Name</label>
+		<span class="drink-name"></span>
+		<br/>
+		<label>Drink Glass</label>
+		<span class="drink-glass"></span>
+		<br/>
+		<label>Drink Instructions</label>
+		<span class="drink-instructions"></span>
+		<br/>
+		<label>Ingredients</label>
+		<span class="drink-ingredients"></span>
+		<br/>
+	</div>
+</script>
 
 </body>
 </html>
