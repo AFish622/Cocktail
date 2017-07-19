@@ -14,9 +14,9 @@
 
 	<div>
 		<form class="search-form">
-			<input class="main-search" type="text" placeholder="Search cocktail recepies">
+			<input class="main-search" type="text" placeholder="Search cocktail recepies" autofocus required>
 				<div class="dropdown">
-					<select>
+					<select class="dropdown-input">
 						<option value="Cocktail">Cocktail</option>
 						<option value="Ingredients">Ingredients</option>
 					</select>
@@ -25,9 +25,9 @@
 		</form>
 	</div>
 
-	<div class="search-results">
+	<div class="search-results hidden">
+		<h1>Drinks</h1>
 		<p class="results"></p>
-		<p class="detailed-results"></p>
 	</div>
 
 	<script
@@ -38,22 +38,24 @@
 	<script type="text/javascript" src="cocktail.js"></script>
 	<a href=""></a>
 
-<script id="drink-template" type="text/template">
-	<div>
-		<label>Drink Name</label>
+
+	<div class="drink-template hidden">
+		<img class="drink-thumbnail" src="" height="200px" width="200px">
+		<br/>
+		<label></label>
 		<span class="drink-name"></span>
 		<br/>
-		<label>Drink Glass</label>
-		<span class="drink-glass"></span>
-		<br/>
-		<label>Drink Instructions</label>
-		<span class="drink-instructions"></span>
-		<br/>
-		<label>Ingredients</label>
+		<label></label>
 		<span class="drink-ingredients"></span>
 		<br/>
+		<label>Instructions: </label>
+		<span class="drink-instructions"></span>
+		<br/>
+		<label>Glassware: </label>
+		<span class="drink-glass"></span>
+		<br/>
 	</div>
-</script>
+
 
 </body>
 </html>
