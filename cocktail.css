@@ -3,7 +3,7 @@
 }
 
 body {
-	background-color: gray;
+	background-color: #C6C6C6;
 }
 
 h1, h2 {
@@ -90,5 +90,20 @@ h1, h2 {
 	border: 2px solid black;
 	max-width: 500px;
 	text-align: center;
+}
+
+li.appendCocktail {
+	padding-top: 10px;
+	background-color: white;
+	height: 40px;
+	color: black;
+}
+
+div.drink-template {
+	background-color: white;
+}
+
+img.drink-thumbnail {
+	margin-top: 20px;
 }
 
