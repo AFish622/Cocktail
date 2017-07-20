@@ -4,24 +4,30 @@
 
 	<title>Cocktail Crafter</title>
 
+	<link href="https://fonts.googleapis.com/css?family=Kite+One" rel="stylesheet">
+
 	<link rel="stylesheet" type="text/css" href="cocktail.css">
 
 </head>
 
 <body>
+	<div class="topper">
+		<h1 class="title">Cocktail Crafter</h1>
+	</div>
 
-	<h1 class="title">Cocktail Crafter</h1>
+	<h2>Look up cocktail recipes by name or ingredient</h2>
 
-	<div>
-		<form class="search-form">
+	<div class="search-form">
+		<form class="main-form">
 			<input class="main-search" type="text" placeholder="Search cocktail recepies" autofocus required>
-				<div class="dropdown">
 					<select class="dropdown-input">
 						<option value="Cocktail">Cocktail</option>
 						<option value="Ingredients">Ingredients</option>
 					</select>
-				</div>
-			<input  class="main-submit" type="submit" value="Cheers">
+			<input  class="main-submit" type="submit" value="Search">
+		</form>
+		<form>
+			<input type="submit" class="random-submit" value="Surprise Me">
 		</form>
 	</div>
 
@@ -30,31 +36,19 @@
 		<p class="results"></p>
 	</div>
 
+	<div class="clone-target"></div>
+
 	<script
   		src="https://code.jquery.com/jquery-3.2.1.min.js"
   		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   		crossorigin="anonymous">
 	</script>
 	<script type="text/javascript" src="cocktail.js"></script>
-	<a href=""></a>
+	
 
 
-	<div class="drink-template hidden">
-		<img class="drink-thumbnail" src="" height="200px" width="200px">
-		<br/>
-		<label></label>
-		<span class="drink-name"></span>
-		<br/>
-		<label></label>
-		<span class="drink-ingredients"></span>
-		<br/>
-		<label>Instructions: </label>
-		<span class="drink-instructions"></span>
-		<br/>
-		<label>Glassware: </label>
-		<span class="drink-glass"></span>
-		<br/>
-	</div>
+
+	
 
 
 </body>

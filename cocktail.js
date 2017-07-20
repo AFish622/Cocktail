@@ -1,7 +1,29 @@
+const template = 
+	`<div class="drink-template">
+		<img class="drink-thumbnail" src="" height="200px" width="200px">
+		<br/>
+		<label></label>
+		<span class="drink-name"></span>
+		<br/>
+		<label></label>
+		<span class="drink-ingredients"></span>
+		<br/>
+		<label>Instructions: </label>
+		<span class="drink-instructions"></span>
+		<br/>
+		<label>Glassware: </label>
+		<span class="drink-glass"></span>
+		<br/>
+	</div>`
+
 
 var getDataFromApi = function(endpoint, query, callback) {
 	$.getJSON('http://www.thecocktaildb.com/api/json/v1/1/' + endpoint + query, function(data){
-		const hasData = data.drinks === null ? noData() : callback(data);
+		!data.drinks ? noData() : callback(data);
+	})
+
+	.catch(err=> {
+		noData();
 	})
 }
 
@@ -23,13 +45,10 @@ const renderDrink = data => {
 }
 
 var renderIndividualCocktail = function(data){
-	$('.drink-thumbnail, .drink-name, .drink-glass, .drink-instructions').text('');
-	$('.drink-ingredients').text('');
-	$('.drink-template').removeClass('hidden');
+
+	const $template = $(template)
 
 	const obj = data.drinks[0];
-
-	console.log(obj)
 
 	const filteredKeys = Object.keys(obj)
 							.filter(key => obj[key]);
@@ -48,13 +67,17 @@ var renderIndividualCocktail = function(data){
 	const howTo = obj.strInstructions;
 
 	ingredients.forEach((ingredient, i) => {
-		$('.drink-ingredients').append(`<p class="detailed-list">${measurements[i]} ${ingredients[i]}</p>`)
+		$template.find('.drink-ingredients').append(`<p>${measurements[i]} ${ingredients[i]}</p>`)
 	})
-	
-	var drinkThumbnail = thumbnail === null ? $('.drink-thumbnail').attr('src', 'https://tabatavaleria.files.wordpress.com/2011/03/bartender02.gif') : $('.drink-thumbnail').attr('src', thumbnail);
-	$('.drink-name').append(name);
-	$('.drink-glass').append(glassware);
-	$('.drink-instructions').append(howTo);
+
+	const defaultImage = 'https://tabatavaleria.files.wordpress.com/2011/03/bartender02.gif'
+	const imgSrc = thumbnail || defaultImage;
+	$template.find('.drink-thumbnail').attr('src', imgSrc)
+	$template.find('.drink-name').append(name);
+	$template.find('.drink-glass').append(glassware);
+	$template.find('.drink-instructions').append(howTo);
+	console.log(obj)
+	$('.clone-target').append($template)
 }
 
 var waitForClickOnSubmit = function() {
@@ -73,17 +96,58 @@ var waitForClickOnSubmit = function() {
 	})
 }
 
+var getRandomDrink = function() {
+	$('.random-submit').click(function(event){
+		event.preventDefault();
+		$('.clone-target').text('');
+		$.getJSON('http://www.thecocktaildb.com/api/json/v1/1/random.php', function(data){
+			const $template = $(template)
+			const obj = data.drinks[0];
+
+			const filteredKeys = Object.keys(obj)
+							.filter(key => obj[key]);
+
+			const ingredients = filteredKeys
+							.filter(key => key.includes('strIngredient'))
+							.map(key => obj[key]);
+
+			const measurements = filteredKeys
+	 						.filter(key => key.includes('strMeasure'))
+	 						.map(key => obj[key]);
+
+			ingredients.forEach((ingredient, i) => {
+				$template.find('.drink-ingredients').append(`<p class="detailed-list">${measurements[i]} ${ingredients[i]}</p>`)
+			})
+
+
+
+			const randomThumbnail = obj.strDrinkThumb
+			const randomName = obj.strDrink;
+			const randonGlassware = obj.strGlass;
+			const randomInstructions = obj.strInstructions
+			const defaultImage = 'https://tabatavaleria.files.wordpress.com/2011/03/bartender02.gif'
+			const imgSrc = randomThumbnail || defaultImage;
+
+			$template.find('.drink-thumbnail').attr('src', imgSrc)
+			$template.find('.drink-name').append(randomName);
+			$template.find('.drink-glass').append(randonGlassware);
+			$template.find('.drink-instructions').append(randomInstructions);
+			$('.clone-target').append($template)
+		})
+	})
+}
+
 var getIdOfChosenDrink = function(){
 	$('body').on('click', '.cocktailLink', function(event){
-		event.preventDefault();
+		event.preventDefault()
 		$('.appendCocktail').addClass('hidden');
 		let chosenCocktail = $(this).text();
 		getDataFromApi('search.php?s=', chosenCocktail, renderIndividualCocktail);
-
 	})
 }
 
 $(function(){
 	waitForClickOnSubmit();
 	getIdOfChosenDrink();
+	getRandomDrink();
 })

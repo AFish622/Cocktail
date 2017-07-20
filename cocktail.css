@@ -1,6 +1,14 @@
-.title {
+* {
+	font-family: 'Kite One', sans-serif;
+}
+
+body {
+	background-color: gray;
+}
+
+h1, h2 {
 	text-align: center;
-	padding-bottom: 150px;
+	padding-bottom: 50px;
 }
 
 .search-form {
@@ -9,29 +17,44 @@
 
 .main-search {
 	width: 300px;
-	height: 30px;
+	height: 45px;
 	font-size: 20px;
 	margin-right: 5px;
-	border: 1px solid black;
+}
+
+.main-form {
+	margin-bottom: 10px;
 }
 
 .dropdown {
+	height: 45px;
 	position: relative;
-	display: inline-block;
+	color: white;
 }
 
 .dropdown-input {
 	width: 125px;
-	height: 35px;
+	height: 45px;
 	font-size: 20px;
 	border: 1px solid black;
 }
 
 .main-submit {
 	width: 100px;
-	height: 35px;
+	height: 45px;
 	font-size: 20px;
 	border: 1px solid black;
+	top: 17px;
+	background-color: white;
+}
+
+.random-submit {
+	width: 125px;
+	height: 45px;
+	font-size: 20px;
+	border: 1px solid black;
+	background-color: white;
+	margin-bottom: 25px;
 }
 
 .search-results {
@@ -45,7 +68,7 @@
 	font-size: 18px;
 }
 
-h1 {
+h1, h2 {
 	text-align: center;
 }
 
@@ -68,3 +91,4 @@ h1 {
 	max-width: 500px;
 	text-align: center;
 }
+
