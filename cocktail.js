@@ -18,7 +18,7 @@ const template =
 
 
 var getDataFromApi = function(endpoint, query, callback) {
-	$.getJSON('http://www.thecocktaildb.com/api/json/v1/1/' + endpoint + query, function(data){
+	$.getJSON('https://www.thecocktaildb.com/api/json/v1/1/' + endpoint + query, function(data){
 		!data.drinks ? noData() : callback(data);
 	})
 
@@ -100,7 +100,7 @@ var getRandomDrink = function() {
 	$('.random-submit').click(function(event){
 		event.preventDefault();
 		$('.clone-target').text('');
-		$.getJSON('http://www.thecocktaildb.com/api/json/v1/1/random.php', function(data){
+		$.getJSON('https://www.thecocktaildb.com/api/json/v1/1/random.php', function(data){
 			const $template = $(template)
 			const obj = data.drinks[0];
 
