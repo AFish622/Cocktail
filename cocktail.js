@@ -45,7 +45,7 @@ const renderDrink = data => {
 }
 
 var renderIndividualCocktail = function(data){
-
+ console.log(data);
 	const $template = $(template)
 
 	const obj = data.drinks[0];
@@ -61,7 +61,9 @@ var renderIndividualCocktail = function(data){
 	 						.filter(key => key.includes('strMeasure'))
 	 						.map(key => obj[key]);
 
-	const thumbnail = obj.strDrinkThumb
+	 const thumbnail = (window.location.protocol.indexOf('https') !== -1) ? obj.strDrinkThumb.replace(/http:/g,'https:') : obj.strDrinkThumb;
+
+	// const thumbnail = obj.strDrinkThumb
 	const name = obj.strDrink;
 	const glassware = obj.strGlass;
 	const howTo = obj.strInstructions;
