@@ -4,7 +4,7 @@
 }
 
 body {
-	/*background-color: #DAF1EE;*/
+	background-color: #F2F4F4;
 }
 
 .head-image {
@@ -54,21 +54,22 @@ h1, h2 {
 div.card-content {
 	background-color: #5D6D7E !important;
 	color: white;
-	font-size: 35px;
+	font-size: 20px;
 }
 
-.small-card {
+/*.small-card {
 	position: relative !important;
 	left: 150px !important;
-}
+}*/
 
 .small-card-text {
-	color: #5D6D7E !important;
+	color: black !important;
+	font-size: 20px;
 }
 
 .big-card {
-	position: relative !important;
-	left: 150px !important;
+	/*position: relative !important;
+	left: 150px !important;*/
 	border: 2px solid black;
 	background-color: #5D6D7E !important;
 }

@@ -2,7 +2,7 @@
 
 
 	const bigCardTemplate = `<div class="row">
-									<div class="col s12 m7 big-card">
+									<div class="col s12 m7 offset-l2 big-card">
 										<div class="card">
 										<div class="card-action big-card-action">
 												<p class="drink-name"></p>
@@ -21,7 +21,7 @@
 									</div>
 								</div>`
 
-	const cardOutput = `<div class="col 12 s12 m7 small-card">
+	const cardOutput = `<div class="col 12 s12 m7 offset-l2 small-card">
 								<h2 class="header"></h2>
 								<div class="card horizontal  cocktail-link">
 									<div class="card-image">
