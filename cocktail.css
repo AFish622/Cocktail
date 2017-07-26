@@ -3,6 +3,14 @@
 	box-sizing: border-box;
 }
 
+@media only screen and (min-width: 640px) {
+
+}
+
+@media only screen and (min-width: 800px) {
+
+}
+
 body {
 	background-color: #F2F4F4;
 }
@@ -57,10 +65,9 @@ div.card-content {
 	font-size: 20px;
 }
 
-/*.small-card {
-	position: relative !important;
-	left: 150px !important;
-}*/
+.small-card {
+	border: 1px solid black !important;
+}
 
 .small-card-text {
 	color: black !important;
