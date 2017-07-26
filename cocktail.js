@@ -1,20 +1,42 @@
-const template = 
-	`<div class="drink-template">
-		<img class="drink-thumbnail" src="" height="200px" width="200px">
-		<br/>
-		<label></label>
-		<span class="drink-name"></span>
-		<br/>
-		<label></label>
-		<span class="drink-ingredients"></span>
-		<br/>
-		<label>Instructions: </label>
-		<span class="drink-instructions"></span>
-		<br/>
-		<label>Glassware: </label>
-		<span class="drink-glass"></span>
-		<br/>
-	</div>`
+	const defaultImage = 'http://www.31dover.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/3/1/31dover-bar-craft-stainless-steel-3-piece-cocktail-set.jpg'
+
+
+	const bigCardTemplate = `<div class="row">
+									<div class="col s12 m7 big-card">
+										<div class="card">
+										<div class="card-action big-card-action">
+												<p class="drink-name"></p>
+											</div>
+											<div class="card-image">
+												<img class="drink-thumbnail" height="400px" width="400px" src="">
+												<span class="card-title"></span>
+											</div>
+											<div class="card content big-card-content">
+												<p class="drink-ingredients"></p>
+												<p class="drink-instructions"></p>
+												<p class="drink-glass"></p>
+											</div>
+											
+										</div>
+									</div>
+								</div>`
+
+	const cardOutput = `<div class="col 12 s12 m7 small-card">
+								<h2 class="header"></h2>
+								<div class="card horizontal  cocktail-link">
+									<div class="card-image">
+										<img class="card-image" src="">
+									</div>
+									<div class="card-stacked">
+										<div class="card-content">
+											<p class="cocktail-name"></p>
+										</div>
+										<div class="card-action">
+											<a class="small-card-text" href="#">Let's make it</a>
+										</div>
+									</div>
+								</div>
+							</div>`
 
 
 var getDataFromApi = function(endpoint, query, callback) {
@@ -28,25 +50,35 @@ var getDataFromApi = function(endpoint, query, callback) {
 }
 
 var noData = function(){
-	$('.results').text('No drinks were found, please try search again');
+	$('.results').html('No drinks were found, please try search again');
 }
 
 var renderIngredients = function(data) {
-	data.drinks.forEach(function(ingredient){
-		$('.results').append('<li class="appendCocktail"><a class="cocktailLink" href="">' + ingredient.strDrink + '</a></li>')
+		const $template = $(cardOutput);
+		const appendIngridents = data.drinks.forEach(function(ingredient){
+		const $template = $(cardOutput);
+		const cardThumbnail = ingredient.strDrinkThumb;
+		const imgSrc = cardThumbnail || defaultImage;
+		$($template).find('.card-image').attr('src', imgSrc)
+		$($template).find('.cocktail-name').append(ingredient.strDrink)
+		$('.results').append($template);
 	})
 }
 
+
 const renderDrink = data => {
-	const toAppend = data.drinks.map(function(drink){
-		return '<li class="appendCocktail"><a class="cocktailLink" href="">' + drink.strDrink + '</a></li>';
+	 	const appendCocktail = data.drinks.map(function(drink){
+	 	const $template = $(cardOutput);
+		const cardThumbnail = drink.strDrinkThumb
+		const imgSrc = cardThumbnail || defaultImage;
+		$($template).find('.card-image').attr('src', imgSrc);
+		$($template).find('.cocktail-name').append(drink.strDrink);
+		$('.results').append($template);
 	})
-	$('.results').append(toAppend)
 }
 
 var renderIndividualCocktail = function(data){
- console.log(data);
-	const $template = $(template)
+	const $template = $(bigCardTemplate);
 
 	const obj = data.drinks[0];
 
@@ -61,25 +93,20 @@ var renderIndividualCocktail = function(data){
 	 						.filter(key => key.includes('strMeasure'))
 	 						.map(key => obj[key]);
 
-	 const thumbnail = (window.location.protocol.indexOf('https') !== -1) ? obj.strDrinkThumb.replace(/http:/g,'https:') : obj.strDrinkThumb;
+	obj.strDrinkThumb = obj.strDrinkThumb.replace('http','https')
 
-	// const thumbnail = obj.strDrinkThumb
-	const name = obj.strDrink;
-	const glassware = obj.strGlass;
-	const howTo = obj.strInstructions;
-
+	const {strDrink, strGlass, strInstructions, strDrinkThumb} = obj
+	
 	ingredients.forEach((ingredient, i) => {
 		$template.find('.drink-ingredients').append(`<p>${measurements[i]} ${ingredients[i]}</p>`)
 	})
 
-	const defaultImage = 'https://tabatavaleria.files.wordpress.com/2011/03/bartender02.gif'
-	const imgSrc = thumbnail || defaultImage;
+	const imgSrc = strDrinkThumb || defaultImage;
 	$template.find('.drink-thumbnail').attr('src', imgSrc)
-	$template.find('.drink-name').append(name);
-	$template.find('.drink-glass').append(glassware);
-	$template.find('.drink-instructions').append(howTo);
-	console.log(obj)
-	$('.clone-target').append($template)
+	$template.find('.drink-name').append(strDrink);
+	$template.find('.drink-glass').append(strGlass);
+	$template.find('.drink-instructions').append(strInstructions);
+	$('.results').html($template)
 }
 
 var waitForClickOnSubmit = function() {
@@ -92,8 +119,7 @@ var waitForClickOnSubmit = function() {
 		const queryType = $('select').find(':selected').val();
 		const callback = queryType == 'Ingredients' ? renderIngredients : renderDrink
 		const endpoint = queryType == 'Ingredients' ? 'filter.php?i=' : 'search.php?s='
-		$('.results').text('');
-		$('drink-template').text('');
+		$('.results').html('');
 		getDataFromApi(endpoint, cocktailTarget, callback);
 	})
 }
@@ -101,49 +127,14 @@ var waitForClickOnSubmit = function() {
 var getRandomDrink = function() {
 	$('.random-submit').click(function(event){
 		event.preventDefault();
-		$('.clone-target').text('');
-		$.getJSON('https://www.thecocktaildb.com/api/json/v1/1/random.php', function(data){
-			const $template = $(template)
-			const obj = data.drinks[0];
-
-			const filteredKeys = Object.keys(obj)
-							.filter(key => obj[key]);
-
-			const ingredients = filteredKeys
-							.filter(key => key.includes('strIngredient'))
-							.map(key => obj[key]);
-
-			const measurements = filteredKeys
-	 						.filter(key => key.includes('strMeasure'))
-	 						.map(key => obj[key]);
-
-			ingredients.forEach((ingredient, i) => {
-				$template.find('.drink-ingredients').append(`<p class="detailed-list">${measurements[i]} ${ingredients[i]}</p>`)
-			})
-
-
-
-			const randomThumbnail = obj.strDrinkThumb
-			const randomName = obj.strDrink;
-			const randonGlassware = obj.strGlass;
-			const randomInstructions = obj.strInstructions
-			const defaultImage = 'https://tabatavaleria.files.wordpress.com/2011/03/bartender02.gif'
-			const imgSrc = randomThumbnail || defaultImage;
-
-			$template.find('.drink-thumbnail').attr('src', imgSrc)
-			$template.find('.drink-name').append(randomName);
-			$template.find('.drink-glass').append(randonGlassware);
-			$template.find('.drink-instructions').append(randomInstructions);
-			$('.clone-target').append($template)
-		})
+		getDataFromApi('random.php', '', renderIndividualCocktail)
 	})
 }
 
 var getIdOfChosenDrink = function(){
-	$('body').on('click', '.cocktailLink', function(event){
-		event.preventDefault()
-		$('.appendCocktail').addClass('hidden');
-		let chosenCocktail = $(this).text();
+	$('body').on('click', '.cocktail-link', function(event){
+		event.preventDefault();
+		let chosenCocktail = $(this).find('.cocktail-name').text();
 		getDataFromApi('search.php?s=', chosenCocktail, renderIndividualCocktail);
 	})
 }
@@ -152,4 +143,5 @@ $(function(){
 	waitForClickOnSubmit();
 	getIdOfChosenDrink();
 	getRandomDrink();
+	$('select').material_select();
 })

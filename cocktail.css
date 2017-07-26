@@ -1,109 +1,96 @@
 * {
 	font-family: 'Kite One', sans-serif;
+	box-sizing: border-box;
 }
 
 body {
-	background-color: #C6C6C6;
+	/*background-color: #DAF1EE;*/
 }
+
+.head-image {
+	height: 325px;
+	width: 100%;
+}
+
+.middle-image {
+	height: 100px;
+	width: 50%;
+	display: cover;
+}
+
 
 h1, h2 {
 	text-align: center;
-	padding-bottom: 50px;
+	color: black;
 }
 
-.search-form {
-	text-align: center;
+.search-form, .results {
+	text-align: center !important;
 }
 
-.main-search {
-	width: 300px;
-	height: 45px;
-	font-size: 20px;
-	margin-right: 5px;
+.main-submit, .random-submit {
+	background-color: #5D6D7E;
 }
 
-.main-form {
-	margin-bottom: 10px;
+
+.main-form, .random-submit {
+	margin-bottom: 40px;
 }
 
-.dropdown {
-	height: 45px;
-	position: relative;
-	color: white;
-}
-
-.dropdown-input {
-	width: 125px;
-	height: 45px;
-	font-size: 20px;
-	border: 1px solid black;
-}
-
-.main-submit {
-	width: 100px;
-	height: 45px;
-	font-size: 20px;
-	border: 1px solid black;
-	top: 17px;
-	background-color: white;
-}
-
-.random-submit {
-	width: 125px;
-	height: 45px;
-	font-size: 20px;
-	border: 1px solid black;
-	background-color: white;
-	margin-bottom: 25px;
-}
-
-.search-results {
-	margin-right: auto;
-	margin-left: auto;
-	max-width: 500px;
-}
-
-.results {
-	text-align: center;
-	font-size: 18px;
-}
-
-h1, h2 {
-	text-align: center;
-}
-
-.appendCocktail {
-	list-style: none;
-	text-align: center;
-	margin-bottom: 25px;
-	border: 1px solid black;
-}
 
 .hidden {
 	display: none;
 }
 
-.drink-template {
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 18px;
+.card-link {
+	color: #4BDCC9;
+}
+
+
+.random-cocktail-name {
+	font-size: 30px;
+}
+
+div.card-content {
+	background-color: #5D6D7E !important;
+	color: white;
+	font-size: 35px;
+}
+
+.small-card {
+	position: relative !important;
+	left: 150px !important;
+}
+
+.small-card-text {
+	color: #5D6D7E !important;
+}
+
+.big-card {
+	position: relative !important;
+	left: 150px !important;
 	border: 2px solid black;
-	max-width: 500px;
-	text-align: center;
+	background-color: #5D6D7E !important;
 }
 
-li.appendCocktail {
-	padding-top: 10px;
-	background-color: white;
-	height: 40px;
-	color: black;
+.big-card-action {
+	font-size: 35px;
+	color: white;
+	background-color: #5D6D7E !important;
 }
 
-div.drink-template {
-	background-color: white;
+.big-card-content {
+	font-size: 20px;
+}
+
+p.drink-ingredients {
+	padding-top: 0px;
+	margin-top: 0px;
 }
 
 img.drink-thumbnail {
-	margin-top: 20px;
+	border: 1px solid black;
 }
+
+
 

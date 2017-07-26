@@ -1,49 +1,76 @@
 <!DOCTYPE html>
-<html land="en">
+<html lang="en">
 <head>
 
 	<title>Cocktail Crafter</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Kite+One" rel="stylesheet">
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.0/css/materialize.min.css">
+
 	<link rel="stylesheet" type="text/css" href="cocktail.css">
 
 </head>
 
 <body>
-	<div class="topper">
-		<h1 class="title">Cocktail Crafter</h1>
+	<img class="head-image" src="https://lh3.googleusercontent.com/yzAyrKFahdiISpP9giAF0Y0mY7nE6j93VTypeQ14qYDElXwaX7XUrCuwUnsLKhgtcycl9iuulT9K1wQwPxm_JmLutmc=s2160-e7-v1-rj">
+
+	<div class="container">
+			<div class="row">
+				<div class="col s6 l10 offset-s3 offset-l1">
+
+					<h1 class="title">Cocktail Crafter</h1>
+
+					<h2>Look up cocktail recipes by name or ingredient</h2>
+
+					<div class="row">
+						<div class="search-form">
+							<form class="main-form">
+								<div class="input-field col s12 m6">
+									<input class="main-search" type="text" placeholder="Search cocktail recepies" autofocus required>
+								</div>
+								<div class="input-field col s6 m3">		
+									<select class="dropdown-input">
+										<option value="Cocktail">Cocktail</option>
+										<option value="Ingredients">Ingredients</option>
+									</select>
+									<label for="materialize"></label>
+								</div>
+
+								<div class="input-field col s6 m3">
+									<input  class="main-submit waves-effect waves-light btn" type="submit" value="Search">
+								</div>
+							</form>
+						</div>
+					</div>
+
+				<div class="row">
+					<form>
+						<div class="input-field col s4 offset-s5">
+							<input type="submit" class="random-submit waves-effect waves-light btn" value="Surprise Me">
+						</div>
+					</form>
+				</div>
+
+				<div class="results-container">
+					<div class="results"></div>
+				</div>
+
+			</div>
+		</div>
 	</div>
 
-	<h2>Look up cocktail recipes by name or ingredient</h2>
-
-	<div class="search-form">
-		<form class="main-form">
-			<input class="main-search" type="text" placeholder="Search cocktail recepies" autofocus required>
-					<select class="dropdown-input">
-						<option value="Cocktail">Cocktail</option>
-						<option value="Ingredients">Ingredients</option>
-					</select>
-			<input  class="main-submit" type="submit" value="Search">
-		</form>
-		<form>
-			<input type="submit" class="random-submit" value="Surprise Me">
-		</form>
-	</div>
-
-	<div class="search-results hidden">
-		<h1>Drinks</h1>
-		<p class="results"></p>
-	</div>
-
-	<div class="clone-target"></div>
 
 	<script
   		src="https://code.jquery.com/jquery-3.2.1.min.js"
   		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   		crossorigin="anonymous">
 	</script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.0/js/materialize.min.js"></script>
+
 	<script type="text/javascript" src="cocktail.js"></script>
 	
 </body>
 </html>
+
