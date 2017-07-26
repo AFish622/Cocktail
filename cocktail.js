@@ -54,10 +54,10 @@ var noData = function(){
 }
 
 var renderIngredients = function(data) {
+	const $template = $(cardOutput);
+	const appendIngridents = data.drinks.forEach(function(ingredient){
 		const $template = $(cardOutput);
-		const appendIngridents = data.drinks.forEach(function(ingredient){
-		const $template = $(cardOutput);
-		const cardThumbnail = ingredient.strDrinkThumb;
+		const cardThumbnail = ingredient.strDrinkThumb.replace('http','https');
 		const imgSrc = cardThumbnail || defaultImage;
 		$($template).find('.card-image').attr('src', imgSrc)
 		$($template).find('.cocktail-name').append(ingredient.strDrink)
@@ -67,9 +67,9 @@ var renderIngredients = function(data) {
 
 
 const renderDrink = data => {
-	 	const appendCocktail = data.drinks.map(function(drink){
+	const appendCocktail = data.drinks.map(function(drink){
 	 	const $template = $(cardOutput);
-		const cardThumbnail = drink.strDrinkThumb
+	 	const cardThumbnail = drink.strDrinkThumb.replace('http','https');
 		const imgSrc = cardThumbnail || defaultImage;
 		$($template).find('.card-image').attr('src', imgSrc);
 		$($template).find('.cocktail-name').append(drink.strDrink);
