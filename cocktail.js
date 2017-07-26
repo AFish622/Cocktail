@@ -21,7 +21,7 @@
 									</div>
 								</div>`
 
-	const cardOutput = `<div class="col 12 s12 m7 offset-l2 small-card">
+	const cardOutput = `<div class="col s12 m6 offset-m3 small-card">
 								<h2 class="header"></h2>
 								<div class="card horizontal  cocktail-link">
 									<div class="card-image">
@@ -53,31 +53,18 @@ var noData = function(){
 	$('.results').html('No drinks were found, please try search again');
 }
 
-var renderIngredients = function(data) {
-	const $template = $(cardOutput);
-	const appendIngridents = data.drinks.forEach(function(ingredient){
-		const $template = $(cardOutput);
-		const cardThumbnail = ingredient.strDrinkThumb.replace('http','https');
-		const imgSrc = cardThumbnail || defaultImage;
-		$($template).find('.card-image').attr('src', imgSrc)
-		$($template).find('.cocktail-name').append(ingredient.strDrink)
-		$('.results').append($template);
-	})
-}
-
-
-const renderDrink = data => {
-	const appendCocktail = data.drinks.map(function(drink){
+const renderDrinks = data => {
+	const appendCocktails = data.drinks.map(function(drink){
 	 	const $template = $(cardOutput);
-	 	const cardThumbnail = drink.strDrinkThumb.replace('http','https');
-		const imgSrc = cardThumbnail || defaultImage;
-		$($template).find('.card-image').attr('src', imgSrc);
-		$($template).find('.cocktail-name').append(drink.strDrink);
-		$('.results').append($template);
+	 	const imgSrc = drink.strDrinkThumb ? drink.strDrinkThumb.replace('http','https') : defaultImage;	
+		$template.find('.card-image').attr('src', imgSrc);
+		$template.find('.cocktail-name').append(drink.strDrink);
+		return $template
 	})
+	$('.results').append(appendCocktails);
 }
 
-var renderIndividualCocktail = function(data){
+const renderIndividualCocktail = data =>{
 	const $template = $(bigCardTemplate);
 
 	const obj = data.drinks[0];
@@ -117,10 +104,9 @@ var waitForClickOnSubmit = function() {
 		$('.search-results').removeClass('hidden');
 		$('.main-search').val('');
 		const queryType = $('select').find(':selected').val();
-		const callback = queryType == 'Ingredients' ? renderIngredients : renderDrink
 		const endpoint = queryType == 'Ingredients' ? 'filter.php?i=' : 'search.php?s='
 		$('.results').html('');
-		getDataFromApi(endpoint, cocktailTarget, callback);
+		getDataFromApi(endpoint, cocktailTarget, renderDrinks);
 	})
 }
 
