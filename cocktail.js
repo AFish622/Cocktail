@@ -50,7 +50,8 @@ var getDataFromApi = function(endpoint, query, callback) {
 }
 
 var noData = function(){
-	$('.results').html('No drinks were found, please try search again');
+	$('.results').html(`<h2>No drinks were found, please try search again</h2>
+		<img height="200px" width="200px" src=https://www.displayfakefoods.com/store/pc/catalog/2417-lg.jpg>`);
 }
 
 const renderDrinks = data => {
