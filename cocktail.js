@@ -2,13 +2,13 @@
 
 
 	const bigCardTemplate = `<div class="row">
-									<div class="col s12 m7 offset-l2 big-card">
+									<div class="col s12 l9 m7 offset-l2 big-card">
 										<div class="card">
 										<div class="card-action big-card-action">
 												<p class="drink-name"></p>
 											</div>
 											<div class="card-image">
-												<img class="drink-thumbnail" height="400px" width="400px" src="">
+												<img class="drink-thumbnail" height="450px" width="400px" src="">
 												<span class="card-title"></span>
 											</div>
 											<div class="card content big-card-content">
