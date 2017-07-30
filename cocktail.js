@@ -2,7 +2,7 @@
 
 
 	const bigCardTemplate = `<div class="row">
-									<div class="col s12 l9 m7 offset-l2 offset-m2 big-card">
+									<div class="col s12 l8 m7 offset-l2 offset-m2 big-card">
 										<div class="card">
 										<div class="card-action big-card-action">
 												<a class="back-link" href="#">Back</a>
