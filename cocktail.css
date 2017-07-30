@@ -25,6 +25,10 @@ h2 {
 	font-size: 30px;
 }
 
+.main-search, input.select-dropdown {
+	font-size: 25px !important;
+}
+
 .search-form, .results {
 	text-align: center !important;
 }
@@ -80,5 +84,20 @@ img.drink-thumbnail {
 	border: 1px solid black;
 }
 
+.drink-name, .drink-glass, .drink-ingredients, .drink-instructions { 
+	text-align: center;
+}
 
+.small-card {
+	cursor: pointer;
+}
+
+.small-card:hover {
+	box-shadow: 10px 10px 5px #888888;
+}
+
+.back-link {
+	font-size: 25px;
+	color: #85C1E9;
+}
 

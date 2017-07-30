@@ -2,26 +2,27 @@
 
 
 	const bigCardTemplate = `<div class="row">
-									<div class="col s12 l9 m7 offset-l2 big-card">
+									<div class="col s12 l9 m7 offset-l2 offset-m2 big-card">
 										<div class="card">
 										<div class="card-action big-card-action">
+												<a class="back-link" href="#">Back</a>
 												<p class="drink-name"></p>
 											</div>
 											<div class="card-image">
-												<img class="drink-thumbnail" height="450px" width="400px" src="">
+												<img class="drink-thumbnail" height="425px" width="300px" src="">
 												<span class="card-title"></span>
 											</div>
 											<div class="card content big-card-content">
 												<p class="drink-ingredients"></p>
 												<p class="drink-instructions"></p>
-												<p class="drink-glass"></p>
+												<p class="drink-glass">Glass: </p>
 											</div>
 											
 										</div>
 									</div>
 								</div>`
 
-	const cardOutput = `<div class="col s12 m6 offset-m3 small-card">
+	const cardOutput = `<div class="col s12 m10 offset-m1 small-card">
 								<h2 class="header"></h2>
 								<div class="card horizontal  cocktail-link">
 									<div class="card-image">
@@ -38,14 +39,15 @@
 								</div>
 							</div>`
 
-
-var getDataFromApi = function(endpoint, query, callback) {
+var getDataFromApi = function(endpoint, query, callback, hidden) {
 	$.getJSON('https://www.thecocktaildb.com/api/json/v1/1/' + endpoint + query, function(data){
-		!data.drinks ? noData() : callback(data);
+		!data.drinks ? noData() : callback(data, hidden);
+		pageScroll();
 	})
 
 	.catch(err=> {
 		noData();
+		pageScroll();
 	})
 }
 
@@ -53,6 +55,8 @@ var noData = function(){
 	$('.results').html(`<h2>No drinks were found, please try search again</h2>
 		<img height="200px" width="200px" src=https://www.displayfakefoods.com/store/pc/catalog/2417-lg.jpg>`);
 }
+
+const pageScroll = () => $('html,body').animate({scrollTop: $('.title').offset().top});
 
 const renderDrinks = data => {
 	const appendCocktails = data.drinks.map(function(drink){
@@ -65,7 +69,7 @@ const renderDrinks = data => {
 	$('.results').append(appendCocktails);
 }
 
-const renderIndividualCocktail = data =>{
+const renderIndividualCocktail = (data, hidden) =>{
 	const $template = $(bigCardTemplate);
 
 	const obj = data.drinks[0];
@@ -81,7 +85,7 @@ const renderIndividualCocktail = data =>{
 	 						.filter(key => key.includes('strMeasure'))
 	 						.map(key => obj[key]);
 
-	obj.strDrinkThumb = obj.strDrinkThumb.replace('http','https')
+	obj.strDrinkThumb = obj.strDrinkThumb ? obj.strDrinkThumb.replace('http','https') : '';
 
 	const {strDrink, strGlass, strInstructions, strDrinkThumb} = obj
 	
@@ -94,19 +98,21 @@ const renderIndividualCocktail = data =>{
 	$template.find('.drink-name').append(strDrink);
 	$template.find('.drink-glass').append(strGlass);
 	$template.find('.drink-instructions').append(strInstructions);
-	$('.results').html($template)
+	$('.results').hide();
+	$('.individual-result').html($template).show()
+	if(hidden){
+		$('.back-link').hide();	
+	}
 }
 
 var waitForClickOnSubmit = function() {
 	$('.search-form').submit(function(event){
 		event.preventDefault();
 		const cocktailTarget = $('.main-search').val();
-		$('.drink-template').addClass('hidden');
-		$('.search-results').removeClass('hidden');
 		$('.main-search').val('');
 		const queryType = $('select').find(':selected').val();
 		const endpoint = queryType == 'Ingredients' ? 'filter.php?i=' : 'search.php?s='
-		$('.results').html('');
+		$('.results').html('').show();
 		getDataFromApi(endpoint, cocktailTarget, renderDrinks);
 	})
 }
@@ -114,7 +120,7 @@ var waitForClickOnSubmit = function() {
 var getRandomDrink = function() {
 	$('.random-submit').click(function(event){
 		event.preventDefault();
-		getDataFromApi('random.php', '', renderIndividualCocktail)
+		getDataFromApi('random.php', '', renderIndividualCocktail, 'hide-back-link')
 	})
 }
 
@@ -126,9 +132,18 @@ var getIdOfChosenDrink = function(){
 	})
 }
 
+var goBackOnClick = function() {
+	$('body').on('click', '.back-link', function(event) {
+		event.preventDefault();
+		$('.individual-result').hide();
+		$('.results').show();
+	})
+}
+
 $(function(){
 	waitForClickOnSubmit();
 	getIdOfChosenDrink();
 	getRandomDrink();
+	goBackOnClick();
 	$('select').material_select();
 })
