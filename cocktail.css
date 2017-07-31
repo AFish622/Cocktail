@@ -29,10 +29,6 @@ h2 {
 	font-size: 25px !important;
 }
 
-.search-form, .results {
-	text-align: center !important;
-}
-
 .main-submit, .random-submit {
 	background-color: #5D6D7E;
 }
@@ -84,8 +80,8 @@ img.drink-thumbnail {
 	border: 1px solid black;
 }
 
-.drink-name, .drink-glass, .drink-ingredients, .drink-instructions { 
-	text-align: center;
+.drink-name, .drink-glass, .drink-ingredients, .drink-instructions, .search-form, .results { 
+	text-align: center !important;
 }
 
 .small-card {
