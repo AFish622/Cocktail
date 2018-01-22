@@ -1,4 +1,5 @@
-# CocktailCrafter https://github.com/AFish622/CocktailCrafter
+# CocktailCrafter 
+https://github.com/AFish622/CocktailCrafter
 
 ## Cocktail app for Thinkfuls (https://www.thinkful.com/) first capstone project. - a responsive asynchronous client side app where you can look look up cocktails my name, by ingredients in them, or at random.
 
